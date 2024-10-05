@@ -4,37 +4,33 @@ import connectDB from "../../../utils/connectDB";
 export default async function handler(req, res) {
     try {
         await connectDB();
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
         res
             .status(500)
-            .json({ status: "failed", message: "Error in connecting DB" });
+            .json({ status: "failed", message: "Error in connecting to DB" });
         return;
     }
 
     if (req.method === "POST") {
         const data = req.body.data;
-        console.log("Incoming Data: ", data);
 
-        if (!data.name || !data.lastName || !data.email) {
-            res.status(400).json({ status: "failed", message: "Invalid Data" });
-            return;
-        }
+        if (!data.name || !data.lastName || !data.email)
+            return res
+                .status(400)
+                .json({ status: "failed", message: "Invalid data" });
 
         try {
             const customer = await Customer.create(data);
-            res.status(201).json({
-                status: "success",
-                message: "Creating customer successful",
-                data: customer,
-            });
-        } catch (error) {
-            console.log(error);
             res
-                .status(500)
-                .json({ status: "failed", message: "Creating customer failed!" });
+                .status(201)
+                .json({ status: "success", message: "Data created", data: customer });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({
+                status: "failed",
+                message: "Error in storing data in DB",
+            });
         }
-    } else {
-        res.status(405).json({ status: "failed", message: "Method not allowed" });
     }
 }

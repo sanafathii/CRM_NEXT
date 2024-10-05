@@ -3,33 +3,25 @@ import { Schema, model, models } from "mongoose";
 const customerSchema = new Schema({
     name: {
         type: String,
-        minLength: 2,
         required: true,
+        minLength: 1,
     },
     lastName: {
         type: String,
-        minLength: 2,
         required: true,
+        minLength: 1,
     },
     email: {
         type: String,
-        minLength: 2,
         required: true,
+        minLength: 1,
     },
-    phone: {
-        type: String,
-    },
-    address: {
-        type: String,
-    },
-    postalCode: {
-        type: Number,
-    },
-    date: {
-        type: Date,
-    },
+    phone: String,
+    address: String,
+    postalCode: Number,
+    date: Date,
     products: {
-        type: [String],
+        type: Array,
         default: [],
     },
     createdAt: {
@@ -37,10 +29,7 @@ const customerSchema = new Schema({
         default: () => Date.now(),
         immutable: true,
     },
-    updatedAt: {
-        type: Date,
-        default: () => new Date(),
-    },
+    updatedAt: { type: Date, default: () => Date.now() },
 });
 
 const Customer = models.Customer || model("Customer", customerSchema);
