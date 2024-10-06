@@ -9,15 +9,7 @@ function Layout({ children }) {
       </header>
       <div className="main">{children}</div>
 
-      <footer className="footer">
-        <a
-          href="https://github.com/sanafathii/CRM_NEXT"
-          target="_blank"
-          rel="noreferrer"
-        >
-          create by sanaFathi - project code
-        </a>
-      </footer>
+      <footer className="footer">create by sanaFathi - project code</footer>
     </>
   );
 }
