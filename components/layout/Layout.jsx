@@ -10,7 +10,11 @@ function Layout({ children }) {
       <div className="main">{children}</div>
 
       <footer className="footer">
-        <a href="https://github.com/sanafathii/CRM_NEXT" target="_blank">
+        <a
+          href="https://github.com/sanafathii/CRM_NEXT"
+          target="_blank"
+          rel="noreferrer"
+        >
           create by sanaFathi - project code
         </a>
       </footer>
